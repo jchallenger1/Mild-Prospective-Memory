@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/Window"/>
+    <qresource prefix="/Images">
+        <file>Resources/OpenFolder icon.ico</file>
+        <file>Resources/Settings icon.ico</file>
+        <file>Resources/Quit icon.ico</file>
+        <file>Resources/Question icon.ico</file>
+        <file>Resources/Refresh icon.ico</file>
+    </qresource>
+</RCC>
