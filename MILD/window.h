@@ -9,6 +9,7 @@
 #include "settings.hpp"
 #include "entryitem.hpp"
 #include "DataEntries.hpp"
+#include "about.hpp"
 #include "Functions.hpp"
 
 class Window : public QMainWindow {
@@ -24,12 +25,15 @@ private slots:
 	void refreshGrid(); //only modifies the text
 	void completeRefreshGrid(); //removes the widgets
 	void outPutEntries();
+	void showAboutProsp();
+	void showAboutGen();
 private:
 	void setupGrid();
 	std::shared_ptr<DataEntries> data = nullptr;
 	std::shared_ptr<MapType> entry_items = nullptr;
 	std::unique_ptr<Settings> settings = nullptr;
 	std::unique_ptr<QVBoxLayout> layout = nullptr;
+	std::unique_ptr<About> about = nullptr;
 	
 	Ui::WindowClass ui;
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include <array>
 //simply listing out standard entries able for use.
-constexpr unsigned short sESize(95);
+constexpr unsigned short sESize(100);
 
 constexpr std::array<const char*, sESize> standard_entries{ // using string would implicitally convert it from const char*, making it not constexpr.
 
@@ -33,7 +33,6 @@ constexpr std::array<const char*, sESize> standard_entries{ // using string woul
 	"The next time I see an advertisement",
 	"The next time I eat anything after breakfast",
 	"The next time I see a bicycle",
-	"Spotting someone with a corf",
 	"Spotting someone with gloves",
 	"Spotting someone with a hat",
 	"Spotting someone with a purse/bag/suitcase",
@@ -52,7 +51,7 @@ constexpr std::array<const char*, sESize> standard_entries{ // using string woul
 	"Entering in any elevator",
 	"Climbing any stairs or ramps",
 	"Spotting someone grab their wallet (including yourself)",
-	"Grabbing food",
+	"The next time I Grab food",
 	"Grabbing any piece of clothing (including removing and placing it in somewhere)",
 	"Spotting someone (including yourself) picking their keys",
 	"Spotting a reference to a recent movie or book",
@@ -76,9 +75,9 @@ constexpr std::array<const char*, sESize> standard_entries{ // using string woul
 	"Reading/watching/hearing a reference to dreaming or the brain",
 	"Feeling noticeably pain or pleasure",
 	"Feeling noticeably cold or hot",
-	"Spotting a bug",
+	"The next time I spot a bug",
 	"Spotting/using a trash can",
-	"Grabbing paper towell",
+	"Grabbing paper towel",
 	"Engaging in personal higiene",
 	"Noticing your forgot something recently",
 	"Making a mental note for the recent future",
@@ -100,4 +99,10 @@ constexpr std::array<const char*, sESize> standard_entries{ // using string woul
 	"Hearing someone (including yourself) mentioning the weather",
 	"Spotting someone (including yourself) picking or dropping an object",
 	"Making a question to someone or to yourself",
+	"Using A Zipper",
+	"Reading/Watching/Hearing A Reference To Dreaming Or The Brain",
+	"Crossing A Street Crosswalk",
+	"Seeing Some Art",
+	"The next time I charge my phone",
+	"The next time I take my headphones off"
 };

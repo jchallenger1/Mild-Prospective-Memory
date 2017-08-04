@@ -6,5 +6,7 @@
         <file>Resources/Quit icon.ico</file>
         <file>Resources/Question icon.ico</file>
         <file>Resources/Refresh icon.ico</file>
+        <file>Resources/lucidity icon.ico</file>
+        <file>Resources/lucidity.png</file>
     </qresource>
 </RCC>

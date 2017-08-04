@@ -8,6 +8,7 @@
 
 Settings::Settings(QDialog * parent) : QDialog(parent) {
 	ui.setupUi(this);
+	this->setWindowIcon(QIcon(":/Images/Resources/Settings icon.ico"));
 	example = std::make_unique<ExampleBox>();
 	example->hide();
 	ui.fileButton->setEnabled(false);
@@ -65,17 +66,19 @@ void Settings::showFileNewDialog() {
 }
 
 void Settings::showFileDialog(QLineEdit* editor) {
-	QFileDialog file(this);
-	file.exec();
-	QStringList n = file.selectedFiles();
+	//QFileDialog takes a large amount of resources,
+	//It is better to delete the resource instead of hiding it.
+	std::unique_ptr<QFileDialog> file = std::make_unique<QFileDialog>(this);
+	file->exec();
+	QStringList n = file->selectedFiles();
 	if (n.size() >= 1) {
 		QFileInfo cur_file(n[0]);
-		if (cur_file.exists() && cur_file.isFile()) {
+		if (cur_file.exists()) {
 			editor->setText(n[0]);
 		}
 		else {
 			QMessageBox box;
-			box.setText(cur_file.absoluteFilePath() + " does not exist or is not a valid file!");
+			box.setText(cur_file.absoluteFilePath() + " does not exist!");
 			editor->setText("");
 		}
 
@@ -120,10 +123,10 @@ void Settings::getData() {//TODO: THE NEW FILE DIALOG
 	if (ui.checkBox_3->isChecked()) {
 		const QString path = ui.lineEdit_2->text();
 		QFileInfo file(path);
-		if (!file.exists() || !file.isFile() ) {
+		if (!file.exists()) {
 			validSettings = false;
 			QMessageBox box(this);
-			box.setText(path + "Does not exist or isn't a file!");
+			box.setText(path + "Does not exist!");
 			box.exec();
 		}
 		else {
@@ -134,10 +137,10 @@ void Settings::getData() {//TODO: THE NEW FILE DIALOG
 	if (ui.checkBox_4->isChecked()) {
 		const QString path = ui.lineEdit_3->text();
 		QFileInfo file(path);
-		if (!file.exists() || !file.isFile()) {
+		if (!file.exists()) {
 			validSettings = false;
 			QMessageBox box(this);
-			box.setText(path + "Does not exist or isn't a file!");
+			box.setText(path + "Does not exist!");
 			box.exec();
 		}
 		else {

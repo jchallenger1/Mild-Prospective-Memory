@@ -1,7 +1,9 @@
 #include <QAction>
 #include <QVBoxLayout>
 #include <QFile>
+#include <QFileInfo>
 #include <QDateTime>
+#include <QDir>
 #include <QTextStream>
 #include <QMessageBox>
 #include "window.h"
@@ -9,11 +11,14 @@
 
 Window::Window(QWidget *parent) : QMainWindow(parent) {
 	ui.setupUi(this);
+	this->setWindowIcon(QIcon(":/Images/Resources/lucidity icon.ico"));
 	data = std::make_shared<DataEntries>(standard_entries);
 	settings = std::make_unique<Settings>();
 	settings->hide();
 	entry_items = std::make_shared<MapType>();
 	layout = std::make_unique<QVBoxLayout>(ui.groupBox);
+	about = std::make_unique<About>();
+	about->hide();
 	
 	setupGrid();
 	
@@ -23,6 +28,8 @@ Window::Window(QWidget *parent) : QMainWindow(parent) {
 	connect(ui.pushButton_2, &QPushButton::pressed, this, &Window::outPutEntries);
 	connect(settings.get(), &Settings::settingsCanceled, this, &Window::closeSettings);
 	connect(settings.get(), &Settings::settingsAccepted, this, &Window::acceptSettings);
+	connect(ui.actionAbout_Prospective_Memory, &QAction::triggered, this, &Window::showAboutProsp);
+	connect(ui.actionAbout_Program, &QAction::triggered, this, &Window::showAboutGen);
 }
 
 void Window::setupGrid() {
@@ -81,31 +88,56 @@ void Window::outPutEntries() {
 	for (auto iter = entry_items->begin(); iter != entry_items->end(); iter++) {
 		entries.emplace_back(iter->second->lineText());
 	}
-	QString raw_path = QString::fromStdString(settings->dif_save_dir ? settings->save_directory + "/"  : "" + settings->file_name);
+	QString raw_path;
+	if (settings->dif_save_dir) {
+		QFileInfo info(QString::fromStdString(settings->save_directory));
+		if (info.isFile()) {
+			raw_path = QString::fromStdString(settings->save_directory);
+		}
+		else {// its a directory and we need to create the file.
+			raw_path = QString::fromStdString(settings->save_directory +"/"+ settings->file_name);
+		}
+	}
+	else {
+		raw_path = QString::fromStdString(settings->file_name);
+	}
+	
 	QFile file(raw_path);
-	if (file.open(QIODevice::WriteOnly)) {
+	if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
 		QTextStream qts(&file);
 		if (settings->date) {
 			QDateTime date = QDateTime::currentDateTime();
-			qts << "\t" << date.toString() << "\n";
+			qts << "\t" << date.toString();
+			endl(qts);
 		}
 		for (auto begin = entries.cbegin(); begin != entries.cend(); begin++) {
 			int range = begin - entries.cbegin();
 			if (settings->number) {
-				qts << range << ". ";
+				qts << range+1 << ". ";
 			}
-			qts << QString::fromStdString(*begin) << "\n";
+			qts << QString::fromStdString(*begin);
+			endl(qts);
 		}
-		QMessageBox success_box(this);
-		success_box.setText(settings->entry_count + " entries successfully written to |" + raw_path + "|");
-		success_box.exec();
+		QMessageBox* success_box = new QMessageBox(this);
+		success_box->setText(QString::number(settings->entry_count) + " entries successfully written to |" + raw_path + "|");
+		success_box->exec();
 	}
 	else {
-		QMessageBox error_box(this);
-		error_box.setText("An error occured when writing to the file with path |" + raw_path + "|");
-		error_box.exec();
+		QMessageBox* error_box = new QMessageBox(this);
+		error_box->setText("An error occured when writing to the file with path |" + raw_path + "|");
+		error_box->exec();
 	}
 }
+
+void Window::showAboutProsp() {
+	about->setIndex(0);
+	about->show();
+}
+void Window::showAboutGen() {
+	about->setIndex(1);
+	about->show();
+}
+
 
 Window::~Window() {
 	entry_items->clear();
