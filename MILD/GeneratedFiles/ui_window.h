@@ -45,6 +45,12 @@ public:
     QPushButton *pushButton;
     QSpacerItem *horizontalSpacer_2;
     QGroupBox *groupBox;
+    QHBoxLayout *horizontalLayout_2;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *pushButton_3;
+    QSpacerItem *horizontalSpacer_5;
+    QPushButton *pushButton_2;
+    QSpacerItem *horizontalSpacer_4;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menu;
@@ -55,7 +61,7 @@ public:
     {
         if (WindowClass->objectName().isEmpty())
             WindowClass->setObjectName(QStringLiteral("WindowClass"));
-        WindowClass->resize(510, 286);
+        WindowClass->resize(608, 335);
         actionSettings = new QAction(WindowClass);
         actionSettings->setObjectName(QStringLiteral("actionSettings"));
         QIcon icon;
@@ -122,10 +128,38 @@ public:
 
         verticalLayout_2->addWidget(groupBox);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalSpacer_3 = new QSpacerItem(198, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_3);
+
+        pushButton_3 = new QPushButton(centralWidget);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+
+        horizontalLayout_2->addWidget(pushButton_3);
+
+        horizontalSpacer_5 = new QSpacerItem(18, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_5);
+
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        horizontalLayout_2->addWidget(pushButton_2);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_4);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
         WindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(WindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 510, 21));
+        menuBar->setGeometry(QRect(0, 0, 608, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menu = new QMenu(menuBar);
@@ -162,6 +196,8 @@ public:
         label->setText(QApplication::translate("WindowClass", "Prosepctive Memory Entries", 0));
         pushButton->setText(QApplication::translate("WindowClass", "Refresh All", 0));
         groupBox->setTitle(QApplication::translate("WindowClass", "Entries", 0));
+        pushButton_3->setText(QApplication::translate("WindowClass", "Quit", 0));
+        pushButton_2->setText(QApplication::translate("WindowClass", "Save Entries", 0));
         menuFile->setTitle(QApplication::translate("WindowClass", "File", 0));
         menu->setTitle(QApplication::translate("WindowClass", "Help", 0));
     } // retranslateUi

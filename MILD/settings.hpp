@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <QWidget>
+#include <QLineEdit>
 #include <string>
 #include <memory>
 #include "ui_settings.h"
@@ -14,16 +15,28 @@ public:
 
 	std::string file_name = "LD.txt";
 	std::string user_entry_path;
+	std::string save_directory;
 	bool date = true;
 	bool number = false;
 	bool add_new_entries = false;
+	bool dif_save_dir = false;
 	int entry_count = 4;
+public slots:
+	void showData();
+signals:
+	void settingsAccepted();
+	void settingsCanceled();
 private slots:
+	void debug();
+	void emitCancel();
 	void getData();
-	void showFileDialog();
+	void showFileNewDialog();
+	void showFileDiffDialog();
 	void showExample();
 	void AllowNewEntries();
+	void AllowDifDir();
 private:
 	std::unique_ptr<ExampleBox> example = nullptr;
 	Ui::Settings ui;
+	void showFileDialog(QLineEdit*);
 };

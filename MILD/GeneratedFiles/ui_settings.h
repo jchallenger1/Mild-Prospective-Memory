@@ -29,9 +29,10 @@ QT_BEGIN_NAMESPACE
 class Ui_Settings
 {
 public:
-    QVBoxLayout *verticalLayout_7;
+    QVBoxLayout *verticalLayout_9;
     QLabel *label;
-    QHBoxLayout *horizontalLayout_6;
+    QHBoxLayout *horizontalLayout_7;
+    QVBoxLayout *verticalLayout_8;
     QVBoxLayout *verticalLayout_5;
     QHBoxLayout *horizontalLayout_5;
     QSpacerItem *horizontalSpacer_3;
@@ -48,6 +49,11 @@ public:
     QPushButton *questionButton;
     QPushButton *fileButton;
     QLineEdit *lineEdit_2;
+    QVBoxLayout *verticalLayout_7;
+    QHBoxLayout *horizontalLayout_6;
+    QCheckBox *checkBox_4;
+    QPushButton *pushButton;
+    QLineEdit *lineEdit_3;
     QSpacerItem *horizontalSpacer_4;
     QVBoxLayout *verticalLayout_6;
     QVBoxLayout *verticalLayout_2;
@@ -66,24 +72,32 @@ public:
     {
         if (Settings->objectName().isEmpty())
             Settings->setObjectName(QStringLiteral("Settings"));
-        Settings->resize(442, 199);
+        Settings->resize(550, 300);
         Settings->setMaximumSize(QSize(550, 300));
-        verticalLayout_7 = new QVBoxLayout(Settings);
-        verticalLayout_7->setSpacing(6);
-        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        verticalLayout_9 = new QVBoxLayout(Settings);
+        verticalLayout_9->setSpacing(6);
+        verticalLayout_9->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
         label = new QLabel(Settings);
         label->setObjectName(QStringLiteral("label"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         QFont font;
         font.setPointSize(20);
         label->setFont(font);
         label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_7->addWidget(label);
+        verticalLayout_9->addWidget(label);
 
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setSpacing(6);
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setSpacing(6);
+        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
@@ -170,11 +184,42 @@ public:
         verticalLayout_5->addLayout(verticalLayout_3);
 
 
-        horizontalLayout_6->addLayout(verticalLayout_5);
+        verticalLayout_8->addLayout(verticalLayout_5);
+
+        verticalLayout_7 = new QVBoxLayout();
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        checkBox_4 = new QCheckBox(Settings);
+        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
+
+        horizontalLayout_6->addWidget(checkBox_4);
+
+        pushButton = new QPushButton(Settings);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        horizontalLayout_6->addWidget(pushButton);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_6);
+
+        lineEdit_3 = new QLineEdit(Settings);
+        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
+        lineEdit_3->setReadOnly(true);
+
+        verticalLayout_7->addWidget(lineEdit_3);
+
+
+        verticalLayout_8->addLayout(verticalLayout_7);
+
+
+        horizontalLayout_7->addLayout(verticalLayout_8);
 
         horizontalSpacer_4 = new QSpacerItem(18, 88, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_6->addItem(horizontalSpacer_4);
+        horizontalLayout_7->addItem(horizontalSpacer_4);
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setSpacing(6);
@@ -219,10 +264,10 @@ public:
         verticalLayout_6->addLayout(verticalLayout);
 
 
-        horizontalLayout_6->addLayout(verticalLayout_6);
+        horizontalLayout_7->addLayout(verticalLayout_6);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_6);
+        verticalLayout_9->addLayout(horizontalLayout_7);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -246,7 +291,7 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer_6);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_2);
+        verticalLayout_9->addLayout(horizontalLayout_2);
 
 
         retranslateUi(Settings);
@@ -263,6 +308,8 @@ public:
         checkBox_3->setText(QApplication::translate("Settings", "Add New Entries", 0));
         questionButton->setText(QApplication::translate("Settings", "?", 0));
         fileButton->setText(QApplication::translate("Settings", "file", 0));
+        checkBox_4->setText(QApplication::translate("Settings", "Save to Different Directory (Default is current)", 0));
+        pushButton->setText(QApplication::translate("Settings", "file", 0));
         checkBox->setText(QApplication::translate("Settings", "Add Date", 0));
         checkBox_2->setText(QApplication::translate("Settings", "Number Entries", 0));
         label_3->setText(QApplication::translate("Settings", "Number of Entries", 0));

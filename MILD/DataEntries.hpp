@@ -9,7 +9,7 @@ using std::string; using std::vector;
 class DataEntries {
 public:
 	DataEntries() = delete;
-	DataEntries(const std::array<const char*, sESize>& arr) : old_entries(arr) {};
+	explicit DataEntries(const std::array<const char*, sESize>& arr) : old_entries(arr) {};
 
 	void addEntries(const std::vector<string>& vec);
 	void addEntries(std::ifstream&);

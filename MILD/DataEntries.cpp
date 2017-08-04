@@ -27,8 +27,10 @@ std::string DataEntries::returnEntry() const {
 
 
 std::string DataEntries::returnSingleEntry(const std::array<const char*, sESize>& olds, const std::vector<string>& news) {
-	std::default_random_engine engine(time(0));
-	std::uniform_int_distribution<int> roll(1, sESize + (news.empty() ? 0 : news.size()));
+	int max = sESize + (news.empty() ? 0 : news.size());
+	std::random_device rd; //seed
+	std::mt19937 engine(rd()); //ruleset for rd(merzenne twister)
+	std::uniform_int_distribution<> roll(1, max); //rng1 range
 	std::string return_string;
 	int rng = roll(engine);
 	if (rng <= sESize) { //uses the old entries

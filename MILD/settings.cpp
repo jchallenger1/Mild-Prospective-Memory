@@ -11,11 +11,26 @@ Settings::Settings(QDialog * parent) : QDialog(parent) {
 	example = std::make_unique<ExampleBox>();
 	example->hide();
 	ui.fileButton->setEnabled(false);
-	connect(ui.fileButton, &QPushButton::pressed, this, &Settings::showFileDialog);
+	ui.pushButton->setEnabled(false);
+	connect(ui.fileButton, &QPushButton::pressed, this, &Settings::showFileNewDialog);
+	connect(ui.pushButton, &QPushButton::pressed, this, &Settings::showFileDiffDialog);
 	connect(ui.questionButton, &QPushButton::pressed, this, &Settings::showExample);
 	connect(ui.checkBox_3, &QCheckBox::stateChanged, this, &Settings::AllowNewEntries);
+	connect(ui.checkBox_4, &QCheckBox::stateChanged, this, &Settings::AllowDifDir);
 	connect(ui.okButton, &QPushButton::pressed, this, &Settings::getData);
-	connect(ui.cancelButton, &QPushButton::pressed, this, &QApplication::quit);
+	connect(ui.cancelButton, &QPushButton::pressed, this, &Settings::emitCancel);
+	connect(this, &QDialog::rejected, this, &Settings::emitCancel);
+}
+
+
+void Settings::emitCancel() {
+	emit settingsCanceled();
+}
+
+void Settings::debug() {
+	QMessageBox box(this);
+	box.setText("I WAS CALLED!");
+	box.exec();
 }
 
 void Settings::AllowNewEntries() {
@@ -30,23 +45,41 @@ void Settings::AllowNewEntries() {
 	}
 }
 
-void Settings::showFileDialog() {
+void Settings::AllowDifDir() {
+	if (ui.checkBox_4->isChecked()) {
+		ui.pushButton->setEnabled(true);
+		ui.lineEdit_3->setReadOnly(false);
+	}
+	else {
+		ui.pushButton->setEnabled(false);
+		ui.lineEdit_3->setReadOnly(true);
+	}
+}
+
+void Settings::showFileDiffDialog() {
+	showFileDialog(ui.lineEdit_3);
+}
+
+void Settings::showFileNewDialog() {
+	showFileDialog(ui.lineEdit_2);
+}
+
+void Settings::showFileDialog(QLineEdit* editor) {
 	QFileDialog file(this);
 	file.exec();
 	QStringList n = file.selectedFiles();
 	if (n.size() >= 1) {
-		QString url = n[0];
-		if (QFile(url).exists()) {
-			ui.lineEdit_2->setText(n[0]);
+		QFileInfo cur_file(n[0]);
+		if (cur_file.exists() && cur_file.isFile()) {
+			editor->setText(n[0]);
 		}
 		else {
 			QMessageBox box;
-			box.setText(url + " does not exist!");
-			ui.lineEdit_2->setText("");
+			box.setText(cur_file.absoluteFilePath() + " does not exist or is not a valid file!");
+			editor->setText("");
 		}
-		
+
 	}
-	
 }
 
 void Settings::showExample() {
@@ -60,25 +93,72 @@ void Settings::showExample() {
 	}
 }
 
+void Settings::showData() {
+	ui.lineEdit->setText(QString::fromStdString(file_name));
+	add_new_entries ? ui.checkBox_3->setChecked(true) : ui.checkBox_3->setChecked(false);
+	ui.lineEdit_2->setText(QString::fromStdString(user_entry_path));
+	dif_save_dir ? ui.checkBox_4->setChecked(true) : ui.checkBox_4->setChecked(false);
+	ui.lineEdit_3->setText(QString::fromStdString(save_directory));
+	date ? ui.checkBox->setChecked(true) : ui.checkBox->setChecked(false);
+	number ? ui.checkBox_2->setChecked(true) : ui.checkBox_2->setChecked(false);
+	ui.spinBox->setValue(entry_count);
+}
 
-void Settings::getData() {
-	file_name = ui.lineEdit->text().toStdString();
-	date = ui.checkBox->isChecked();
-	number = ui.checkBox_2->isChecked();
-	entry_count = ui.spinBox->value();
+/*If one part of the settings is incorrect, we should not accept
+all of the settings unless we know they're all correct. If the settings are
+invalid, then the current settings should not change. There could be
+a possibility of a part of a program accepting some settings when
+it isn't suppost to. */
+void Settings::getData() {//TODO: THE NEW FILE DIALOG
+	bool validSettings = true;
+	std::string temp_file_name = ui.lineEdit->text().toStdString();
+	bool temp_date = ui.checkBox->isChecked();
+	bool temp_number = ui.checkBox_2->isChecked();
+	int temp_entry_count = ui.spinBox->value();
+	bool temp_add_new_entries = false, temp_dif_save_dir = false;
+	std::string temp_user_entry_path, temp_save_directory;
 	if (ui.checkBox_3->isChecked()) {
 		const QString path = ui.lineEdit_2->text();
-		QFile file(path);
-		if (!file.exists()) {
-			add_new_entries = false;
+		QFileInfo file(path);
+		if (!file.exists() || !file.isFile() ) {
+			validSettings = false;
 			QMessageBox box(this);
-			box.setText(path + "Does not exist!");
+			box.setText(path + "Does not exist or isn't a file!");
 			box.exec();
 		}
 		else {
-			add_new_entries = true;
-			user_entry_path = ui.lineEdit_2->text().toStdString();
+			temp_add_new_entries = true;
+			temp_user_entry_path = ui.lineEdit_2->text().toStdString();
 		}
+	}
+	if (ui.checkBox_4->isChecked()) {
+		const QString path = ui.lineEdit_3->text();
+		QFileInfo file(path);
+		if (!file.exists() || !file.isFile()) {
+			validSettings = false;
+			QMessageBox box(this);
+			box.setText(path + "Does not exist or isn't a file!");
+			box.exec();
+		}
+		else {
+			temp_dif_save_dir = true;
+			temp_save_directory = path.toStdString();
+		}
+	}
+	if (validSettings) {
+		file_name = temp_file_name.empty() ? file_name : temp_file_name;
+		date = temp_date ? temp_date : date;
+		number = temp_number ? temp_number : number;
+		entry_count = temp_entry_count;
+		if (temp_add_new_entries) {
+			add_new_entries = true;
+			user_entry_path = temp_user_entry_path;
+		}
+		if (temp_dif_save_dir) {
+			dif_save_dir = true;
+			save_directory = temp_save_directory;
+		}
+		emit settingsAccepted();
 	}
 }
 
