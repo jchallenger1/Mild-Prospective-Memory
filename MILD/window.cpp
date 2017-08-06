@@ -78,7 +78,7 @@ void Window::acceptSettings() {
 	closeSettings();
 	completeRefreshGrid();
 	if (settings->add_new_entries) {
-		std::ifstream ifs(settings->user_entry_path);
+		std::ifstream ifs(settings->user_entry_path.toStdString());
 		data->addEntries(ifs);
 	}
 }
@@ -90,16 +90,16 @@ void Window::outPutEntries() {
 	}
 	QString raw_path;
 	if (settings->dif_save_dir) {
-		QFileInfo info(QString::fromStdString(settings->save_directory));
+		QFileInfo info(settings->save_directory);
 		if (info.isFile()) {
-			raw_path = QString::fromStdString(settings->save_directory);
+			raw_path = settings->save_directory;
 		}
 		else {// its a directory and we need to create the file.
-			raw_path = QString::fromStdString(settings->save_directory +"/"+ settings->file_name);
+			raw_path = settings->save_directory +"/"+ settings->file_name;
 		}
 	}
 	else {
-		raw_path = QString::fromStdString(settings->file_name);
+		raw_path = settings->file_name;
 	}
 	
 	QFile file(raw_path);

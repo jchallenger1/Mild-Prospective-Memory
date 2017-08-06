@@ -13,9 +13,9 @@ public:
 	Settings(QDialog * parent = nullptr);
 
 
-	std::string file_name = "LD.txt";
-	std::string user_entry_path;
-	std::string save_directory;
+	QString file_name = "LD.txt";
+	QString user_entry_path;
+	QString save_directory;
 	bool date = true;
 	bool number = false;
 	bool add_new_entries = false;

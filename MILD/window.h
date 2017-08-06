@@ -34,7 +34,6 @@ private:
 	std::unique_ptr<Settings> settings = nullptr;
 	std::unique_ptr<QVBoxLayout> layout = nullptr;
 	std::unique_ptr<About> about = nullptr;
-	
 	Ui::WindowClass ui;
 };
 

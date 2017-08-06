@@ -97,11 +97,11 @@ void Settings::showExample() {
 }
 
 void Settings::showData() {
-	ui.lineEdit->setText(QString::fromStdString(file_name));
+	ui.lineEdit->setText(file_name);
 	add_new_entries ? ui.checkBox_3->setChecked(true) : ui.checkBox_3->setChecked(false);
-	ui.lineEdit_2->setText(QString::fromStdString(user_entry_path));
+	ui.lineEdit_2->setText(user_entry_path);
 	dif_save_dir ? ui.checkBox_4->setChecked(true) : ui.checkBox_4->setChecked(false);
-	ui.lineEdit_3->setText(QString::fromStdString(save_directory));
+	ui.lineEdit_3->setText(save_directory);
 	date ? ui.checkBox->setChecked(true) : ui.checkBox->setChecked(false);
 	number ? ui.checkBox_2->setChecked(true) : ui.checkBox_2->setChecked(false);
 	ui.spinBox->setValue(entry_count);
@@ -114,12 +114,12 @@ a possibility of a part of a program accepting some settings when
 it isn't suppost to. */
 void Settings::getData() {//TODO: THE NEW FILE DIALOG
 	bool validSettings = true;
-	std::string temp_file_name = ui.lineEdit->text().toStdString();
+	QString temp_file_name = ui.lineEdit->text();
 	bool temp_date = ui.checkBox->isChecked();
 	bool temp_number = ui.checkBox_2->isChecked();
 	int temp_entry_count = ui.spinBox->value();
 	bool temp_add_new_entries = false, temp_dif_save_dir = false;
-	std::string temp_user_entry_path, temp_save_directory;
+	QString temp_user_entry_path, temp_save_directory;
 	if (ui.checkBox_3->isChecked()) {
 		const QString path = ui.lineEdit_2->text();
 		QFileInfo file(path);
@@ -131,7 +131,7 @@ void Settings::getData() {//TODO: THE NEW FILE DIALOG
 		}
 		else {
 			temp_add_new_entries = true;
-			temp_user_entry_path = ui.lineEdit_2->text().toStdString();
+			temp_user_entry_path = ui.lineEdit_2->text();
 		}
 	}
 	if (ui.checkBox_4->isChecked()) {
@@ -145,11 +145,11 @@ void Settings::getData() {//TODO: THE NEW FILE DIALOG
 		}
 		else {
 			temp_dif_save_dir = true;
-			temp_save_directory = path.toStdString();
+			temp_save_directory = path;
 		}
 	}
 	if (validSettings) {
-		file_name = temp_file_name.empty() ? file_name : temp_file_name;
+		file_name = temp_file_name.isEmpty() ? file_name : temp_file_name;
 		date = temp_date ? temp_date : date;
 		number = temp_number ? temp_number : number;
 		entry_count = temp_entry_count;

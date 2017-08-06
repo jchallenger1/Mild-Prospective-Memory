@@ -43,7 +43,8 @@ public:
     {
         if (About->objectName().isEmpty())
             About->setObjectName(QStringLiteral("About"));
-        About->resize(532, 477);
+        About->resize(532, 478);
+        About->setMaximumSize(QSize(532, 478));
         horizontalLayout = new QHBoxLayout(About);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
