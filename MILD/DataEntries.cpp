@@ -15,7 +15,7 @@ void DataEntries::addEntries(const std::vector<string>&vec) {
 void DataEntries::addEntries(std::ifstream& ifs) {
 	std::vector<string> ent;
 	std::string x;
-	while (std::getline(std::cin, x)) {
+	while (std::getline(ifs, x)) {
 		ent.push_back(x);
 	}
 	addEntries(ent);
