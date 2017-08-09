@@ -29,13 +29,14 @@ public:
     QLabel *label;
     QLabel *label_2;
     QTextEdit *textEdit;
+    QLabel *label_3;
 
     void setupUi(QWidget *ExampleBox)
     {
         if (ExampleBox->objectName().isEmpty())
             ExampleBox->setObjectName(QStringLiteral("ExampleBox"));
-        ExampleBox->resize(412, 135);
-        ExampleBox->setMaximumSize(QSize(412, 135));
+        ExampleBox->resize(466, 254);
+        ExampleBox->setMaximumSize(QSize(466, 254));
         verticalLayout_2 = new QVBoxLayout(ExampleBox);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -67,6 +68,12 @@ public:
 
         verticalLayout_2->addWidget(textEdit);
 
+        label_3 = new QLabel(ExampleBox);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setMargin(0);
+
+        verticalLayout_2->addWidget(label_3);
+
 
         retranslateUi(ExampleBox);
 
@@ -85,6 +92,7 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time I see a cat</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time I see a dog</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time I see a bird</p></body></html>", 0));
+        label_3->setText(QApplication::translate("ExampleBox", "<html><head/><body><p>If you want the program to create a file in a directory, simply modify the path in the line text.</p><p>Eg, if you want to create a LD.txt in directory Example, it may look like :</p><p>&quot;C:\\Users\\User\\Desktop\\&quot; or</p><p>&quot;/home/User/Desktop/&quot; </p><p>**** - Note the ending backslash/forward slash!</p></body></html>", 0));
     } // retranslateUi
 
 };

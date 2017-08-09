@@ -66,7 +66,6 @@ void Window::completeRefreshGrid() {
 
 void Window::showSettings() {
 	settings->showData();
-	settings->setModal(true);
 	settings->show();
 }
 
