@@ -63,6 +63,7 @@ public:
     QLabel *label_3;
     QSpinBox *spinBox;
     QHBoxLayout *horizontalLayout_2;
+    QLabel *label_4;
     QSpacerItem *horizontalSpacer_5;
     QPushButton *okButton;
     QPushButton *cancelButton;
@@ -272,7 +273,12 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        label_4 = new QLabel(Settings);
+        label_4->setObjectName(QStringLiteral("label_4"));
+
+        horizontalLayout_2->addWidget(label_4);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_5);
 
@@ -313,6 +319,7 @@ public:
         checkBox->setText(QApplication::translate("Settings", "Add Date", 0));
         checkBox_2->setText(QApplication::translate("Settings", "Number Entries", 0));
         label_3->setText(QApplication::translate("Settings", "Number of Entries", 0));
+        label_4->setText(QApplication::translate("Settings", "Settings are not applied until you press the OK button.", 0));
         okButton->setText(QApplication::translate("Settings", "OK", 0));
         cancelButton->setText(QApplication::translate("Settings", "Cancel", 0));
     } // retranslateUi

@@ -72,7 +72,7 @@ p, li { white-space: pre-wrap; }
    <item>
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you want the program to create a file in a directory, simply modify the path in the line text.&lt;/p&gt;&lt;p&gt;Eg, if you want to create a LD.txt in directory Example, it may look like :&lt;/p&gt;&lt;p&gt;&amp;quot;C:\Users\User\Desktop\&amp;quot; or&lt;/p&gt;&lt;p&gt;&amp;quot;/home/User/Desktop/&amp;quot; &lt;/p&gt;&lt;p&gt;**** - Note the ending backslash/forward slash!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you want the program to create a file in a directory, simply modify the path in the line text.&lt;/p&gt;&lt;p&gt;Eg, if you want to create a LD.txt in directory Desktop, it may look like :&lt;/p&gt;&lt;p&gt;&amp;quot;C:\Users\User\Desktop\&amp;quot; or&lt;/p&gt;&lt;p&gt;&amp;quot;/home/User/Desktop/&amp;quot; &lt;/p&gt;&lt;p&gt;**** - Note the ending backslash/forward slash!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="margin">
       <number>0</number>

@@ -92,7 +92,7 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time I see a cat</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time I see a dog</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time I see a bird</p></body></html>", 0));
-        label_3->setText(QApplication::translate("ExampleBox", "<html><head/><body><p>If you want the program to create a file in a directory, simply modify the path in the line text.</p><p>Eg, if you want to create a LD.txt in directory Example, it may look like :</p><p>&quot;C:\\Users\\User\\Desktop\\&quot; or</p><p>&quot;/home/User/Desktop/&quot; </p><p>**** - Note the ending backslash/forward slash!</p></body></html>", 0));
+        label_3->setText(QApplication::translate("ExampleBox", "<html><head/><body><p>If you want the program to create a file in a directory, simply modify the path in the line text.</p><p>Eg, if you want to create a LD.txt in directory Desktop, it may look like :</p><p>&quot;C:\\Users\\User\\Desktop\\&quot; or</p><p>&quot;/home/User/Desktop/&quot; </p><p>**** - Note the ending backslash/forward slash!</p></body></html>", 0));
     } // retranslateUi
 
 };
