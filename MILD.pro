@@ -29,7 +29,6 @@ SOURCES += \
     entryitem.cpp \
     examplebox.cpp \
     main.cpp \
-    qrc_window.cpp \
     settings.cpp \
     window.cpp
 
