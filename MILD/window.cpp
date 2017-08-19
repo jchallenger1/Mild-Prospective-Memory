@@ -24,6 +24,7 @@ Window::Window(QWidget *parent) : QMainWindow(parent) {
 	
 	connect(ui.pushButton_3, &QPushButton::pressed, this, &QApplication::quit);
 	connect(ui.actionSettings, &QAction::triggered, this, &Window::showSettings);
+	connect(ui.actionQuit, &QAction::triggered, qApp, &QApplication::quit);
 	connect(ui.pushButton, &QPushButton::pressed, this, &Window::refreshGrid);
 	connect(ui.pushButton_2, &QPushButton::pressed, this, &Window::outPutEntries);
 	connect(settings.get(), &Settings::settingsCanceled, this, &Window::closeSettings);
