@@ -11,4 +11,3 @@ To use on visual studio 2015+ go to File->Open Project and select MILD.sln<br>
 In Windows & Linux:<br>
 To use on Qt Creator, move MILD.pro and MILD.pro.user into the MILD directory.<br>
 Move all files from MILD/GeneratedFiles to MILD directory and delete the MILD/GeneratedFiles Directory.<br>
-If you recieve an error in DataEntries.cpp, add #include &lt;algorithm&gt; to the top of the file.
