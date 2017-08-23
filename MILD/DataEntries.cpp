@@ -1,6 +1,7 @@
 
 #include "DataEntries.hpp"
 
+#include <algorithm>
 #include <memory>
 #include <string>
 #include <vector>
@@ -8,6 +9,7 @@
 #include <iostream>
 #include <random>
 #include <ctime>
+
 void DataEntries::addEntries(const std::vector<string>&vec) {
 	new_entries.assign(vec.cbegin(), vec.cend());
 }
